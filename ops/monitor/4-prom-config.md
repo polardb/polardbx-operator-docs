@@ -1,3 +1,4 @@
+# 配置 Prometheus 和 Grafana
 PolarDB-X Monitor 的 helm chart 采用了默认的 Prometheus 和 Grafana 配置，如果您想修改相关配置，可以使用如下的命令安装或者升级 PolarDB-X Monitor，通过 values.yaml 覆盖默认的配置。
 
 ```shell

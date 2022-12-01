@@ -85,3 +85,7 @@ spec:
 ## 监控
 
 参考 [[监控]](./monitor/README.md) 为 PolarDB-X 集群开启监控功能。 
+
+## 日志采集
+
+参考 [[日志采集]](./logcollector/README.md) 为 PolarDB-X 集群开启日志采集功能。 

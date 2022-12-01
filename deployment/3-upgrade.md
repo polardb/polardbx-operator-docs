@@ -1,4 +1,21 @@
-使用下面的命令升级系统组件：
+升级 PolarDB-X Operator
+========
+
+由于 Helm 不会更新 CRD, 因此 PolarDB-X Operator 的升级分为如下两个步骤：
+1. 更新 CRD
+2. 升级 Operator
+
+
+### 更新 CRD
+
+1. 请拉取版本对应的 [CRD 文件](https://github.com/ApsaraDB/galaxykube/tree/main/charts/polardbx-operator/crds)。CRD 文件的拉取可以直接拉取源码，也可以下载 PolarDB-X Operator 对应版本的 [Release 包](https://github.com/ApsaraDB/galaxykube/releases)，解压后获取。
+2. 执行如下命令更新 CRD:
+```shell
+kubectl apply -f polardbx-operator/crds
+```
+
+
+### 升级 Operator
 
 ```bash
 helm upgrade --namespace polardbx-operator-system polardbx/polardbx-operator
@@ -9,5 +26,3 @@ helm upgrade --namespace polardbx-operator-system polardbx/polardbx-operator
 ```bash
 helm upgrade --namespace polardbx-operator-system -f values.yaml polardbx/polardbx-operator
 ```
-
-注意，CRD 不会更新，请拉取版本对应的 [CRD 文件](https://github.com/ApsaraDB/galaxykube/tree/main/charts/polardbx-operator/crds) 自行应用。

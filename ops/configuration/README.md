@@ -1,4 +1,4 @@
-数据库参数设置
+参数设置
 ===========
 
 ### CN 静态参数
@@ -15,3 +15,9 @@
 ### DN 参数
 
 [DN 参数](./2-dn-variable.md)
+
+### 参数模板
+[参数模板](./3-parameter-template.md)
+
+### 动态参数
+[动态参数](./4-dynamic-parameter.md)

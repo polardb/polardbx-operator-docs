@@ -22,4 +22,4 @@
 
 1. [检查节点状态](./cdc/1-cdc-state-inspect.md)
 2. [登录日志节点容器](./cdc/2-cdc-node-login.md)
-3. [删除重建日志节点](./cdc/3-cdc-delete.md)
+3. [重建日志节点](./cdc/3-cdc-delete.md)

@@ -23,5 +23,5 @@ kubectl port-forward svc/prometheus-k8s -n polardbx-monitor 9090
 
 在浏览器中输入: [http://localhost:9090](http://localhost:9090), 即可访问到 Prometheus页面。
 
-如果您的 K8s 集群中支持 LoadBalancer，你可以为 Prometheus 的 Service 配置 LoadBalancer 进行访问，详见：
+如果您的 K8s 集群中支持 LoadBalancer，你可以为 Prometheus 的 Service 配置 LoadBalancer 进行访问，详见：[配置 Prometheus 和 Grafana](./4-prom-config.md)
 

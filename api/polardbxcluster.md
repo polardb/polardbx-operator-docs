@@ -38,6 +38,35 @@ spec:
 
   # **Optional**
   #
+  # PolarDB-X 集群是否为只读实例，默认为 false
+  readonly: false
+
+  # **Optional**
+  #
+  # PolarDB-X 只读实例所属主实例的名称，默认为空
+  # 当本实例不为只读实例时，此字段无效
+  primaryCluster: pxc-master
+
+  # **Optional**
+  #
+  # PolarDB-X 主实例附属的只读实例，仅在本实例不为只读时生效
+  # 当本实例创建时，根据以下信息创建出与本实例规格和参数相同的只读实例
+  # 本字段不可修改，且仅在创建时有效
+  initReadonly:
+  - # 只读实例 CN 数
+    cnRepilcas: 1
+    # **Optional**
+    #
+    # 只读实例后缀名，不填则会生成随机后缀
+    name: readonly
+    # **Optional**
+    #
+    # 只读实例参数
+    extraParams:
+      AttendHtap: "true"
+
+  # **Optional**
+  #
   # PolarDB-X 集群安全配置
   security:
     # **Optional**
@@ -75,6 +104,9 @@ spec:
         # 自定义 CN 静态配置，key-value 结构
         ServerProperties:
           processors: 8
+        # 是否在该（只读）实例 CN 上开启 MPP 能力，主实例 CN 默认开启
+        # 当该参数开启时，该实例会参与多机并行(MPP)，同时分担主实例的读流量，反之则不参与
+        AttendHtap: false
       # 动态配置，修改并 apply 会由 operator 自动推送，key-value 结构
       dynamic:
         CONN_POOL_IDLE_TIMEOUT: 30

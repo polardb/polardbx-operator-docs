@@ -50,7 +50,7 @@ $ su galaxykube
 minikube start --cpus 4 --memory 7960 --image-mirror-country cn --registry-mirror=https://docker.mirrors.sjtug.sjtu.edu.cn
 ```
 
-> 注：这里我们使用了阿里云的 minikube 镜像源以及 USTC 提供的 docker 镜像源来加速镜像的拉取。
+> 注：这里我们使用了阿里云的 minikube 镜像源以及 SJTU 提供的 docker 镜像源来加速镜像的拉取。
 
 如果一切运行正常，你将会看到类似下面的输出。
 

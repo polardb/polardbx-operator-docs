@@ -7,4 +7,3 @@
 资源类型:
 
 + [PolarDBXCluster](./polardbxcluster.md)
-+ [XStore](./xstore.md)

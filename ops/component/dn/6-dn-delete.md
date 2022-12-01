@@ -5,7 +5,6 @@
 kubectl delete pod {dn pod名}
 ```
 
-注：不排除因为啥意外情况 dn pod 会回不来 😒
 
 ## Graceful Shutdown 
 部分场景下我们需要对 DN 进行graceful的 shutdown然后重启，可先执行如下命令关闭dn的探活：

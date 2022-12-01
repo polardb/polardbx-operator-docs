@@ -18,3 +18,5 @@ polardbx-test   1/1   2/2   2/2   2/2   Deleting   6.2Gi  2m1s
 kubectl get pxc polardbx-test
 Error from server (NotFound): polardbxclusters.polardbx.aliyun.com "polardbx-test" not found
 ```
+
+当 PolarDBXCluster 主实例被删除时，其附属的只读实例也会随之删除

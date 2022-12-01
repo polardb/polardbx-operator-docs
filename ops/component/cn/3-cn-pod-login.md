@@ -1,3 +1,5 @@
+登录计算节点
+=======
 ## 登录 Pod
 如果 CN 处于 ready 状态，执行如下命令即可登录 CN Pod：
 
@@ -10,6 +12,3 @@ kubectl exec -it {pod 名} bash
 ```shell
 kubectl annotate pod {pod 名} runmode=debug
 ```
-
-## 登录 CN
-登录 pod 后，执行 myc 命令即可进入 MySQL 命令行。

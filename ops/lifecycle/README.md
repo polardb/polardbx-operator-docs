@@ -8,6 +8,7 @@
    4. [集群拓扑规则-容灾部署示例](./1-create-ha-example.md)
    5. [容器宿主机网络模式](./1-create-host-network-mode.md)
    6. [极简部署模式 (ShareGMS)](./1-create-simple-mode.md)
+   7. [只读实例创建](./1-create-readonly-pxc.md)
 2. [删除](./2-delete.md)
 3. [升级](./3-update.md)
 4. [升配](./4-upgrade.md)
