@@ -235,7 +235,7 @@ spec:
           # 存储节点引擎，默认 galaxy
           engine: galaxy
           # 存储节点镜像，默认由 operator 指定
-          image: galaxystore-8:v1.0
+          image: polardbx-engine:latest
           # 存储节点 Service 类型，默认为 ClusterIP
           serviceType: ClusterIP
           # 存储节点 Pod 是否适用宿主机网络，默认为 true
@@ -268,7 +268,7 @@ spec:
       cn:
         replicas: 3
         template:
-          image: galaxysql:v1.0
+          image: polardbx-sql:latest
           hostNetwork: false
           resources:
             limits:
@@ -279,7 +279,7 @@ spec:
       cdc:
         replicas: 2
         template:
-          image: galaxysql-cdc:v1.0
+          image: polardbx-cdc:latest
           hostNetwork: false
           resources:
             limits:

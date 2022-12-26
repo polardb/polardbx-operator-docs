@@ -11,7 +11,7 @@ helm install --namespace polardbx-monitor polardbx-monitor polardbx-monitor-1.2.
 helm upgrade --namespace polardbx-monitor polardbx-monitor polardbx-monitor-1.2.0.tgz -f values.yaml
 ```
 
-values.yaml 文件包含了 Prometheus 和 Grafana 的相关配置项，下面针对常见的几种场景给出配置示例，详细的配置列表详见：[values.yaml](https://github.com/ApsaraDB/galaxykube/blob/main/charts/polardbx-monitor/values.yaml) 。
+values.yaml 文件包含了 Prometheus 和 Grafana 的相关配置项，下面针对常见的几种场景给出配置示例，详细的配置列表详见：[values.yaml](https://github.com/polardb/polardbx-operator/blob/main/charts/polardbx-monitor/values.yaml) 。
 
 ### 配置 LoadBalancer
 如果您的 K8s 集群支持 LoadBalancer，可以在安装或者升级 PolarDB-X Monitor 的时候通过 -f 参数指定如下配置：

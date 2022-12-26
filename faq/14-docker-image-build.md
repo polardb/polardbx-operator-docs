@@ -1,6 +1,6 @@
 ## CN
-拉取GalaxySQL 代码，执行docker_build.sh 即可。
-[https://github.com/ApsaraDB/galaxysql/blob/main/docker_build.sh](https://github.com/ApsaraDB/galaxysql/blob/main/docker_build.sh)
+拉取 PolarDB-X SQL 代码，执行docker_build.sh 即可。
+[https://github.com/polardb/polardbx-sql/blob/main/docker_build.sh](https://github.com/polardb/polardbx-sql/blob/main/docker_build.sh)
 
 ## DN
 
@@ -20,19 +20,19 @@ RUN useradd -ms /bin/bash mysql && \
     echo "mysql:mysql" | chpasswd && \
     echo "mysql    ALL=(ALL)    NOPASSWD: ALL" >> /etc/sudoers
 
-# Install Galaxy engine's rpm, use URL to reduce the final image size.
-ARG GALAXY_ENGINE_RPM_URL=<url-to-dn-rpm-package>.rpm
+# Install polardbx engine's rpm, use URL to reduce the final image size.
+ARG POLARDBX_ENGINE_RPM_URL=<url-to-dn-rpm-package>.rpm
 
-RUN yum install -y ${GALAXY_ENGINE_RPM_URL} && \
+RUN yum install -y ${POLARDBX_ENGINE_RPM_URL} && \
     yum clean all && rm -rf /var/cache/yum && rm -rf /var/tmp/yum-* # && \
     # mv /u01/xcluster80_current/* /opt/galaxy_engine/ && rm -rf /u01
 
-# Target to galaxy engine home.
+# Target to polardbx engine home.
 WORKDIR /opt/galaxy_engine
 
 # Setup environment variables.
-ENV GALAXY_ENGINE_HOME=/opt/galaxy_engine
-ENV PATH=$GALAXY_ENGINE_HOME/bin:$PATH
+ENV POLARDBX_ENGINE_HOME=/opt/galaxy_engine
+ENV PATH=$POLARDBX_ENGINE_HOME/bin:$PATH
 
 ENTRYPOINT mysqld
 ```
@@ -42,10 +42,10 @@ ENTRYPOINT mysqld
 3. 执行
 
 ```bash
-docker build --build-arg GALAXY_ENGINE_RPM_URL=${GALAXY_ENGINE_RPM_URL} -t galaxyengine .
+docker build --build-arg POLARDBX_ENGINE_RPM_URL=${POLARDBX_ENGINE_RPM_URL} -t polardbx-engine .
 ```
 
 
 ## CDC
 拉取仓库代码，执行 build.sh 即可。
-详见：[https://github.com/ApsaraDB/galaxycdc/blob/main/docker/build.sh](https://github.com/ApsaraDB/galaxycdc/blob/main/docker/build.sh)
+详见：[https://github.com/polardb/polardbx-cdc/blob/main/docker/build.sh](https://github.com/polardb/polardbx-cdc/blob/main/docker/build.sh)

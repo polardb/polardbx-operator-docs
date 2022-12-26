@@ -19,7 +19,7 @@ $ kubectl create namespace polardbx-operator-system
 执行以下命令安装 PolarDB-X Operator。
 
 ```bash
-$ helm install --namespace polardbx-operator-system polardbx-operator https://github.com/ApsaraDB/galaxykube/releases/download/v1.2.2/polardbx-operator-1.2.2.tgz
+$ helm install --namespace polardbx-operator-system polardbx-operator https://github.com/polardb/polardbx-operator/releases/download/v1.3.0/polardbx-operator-1.3.0.tgz
 ```
 
 您也可以通过 PolarDB-X 的 Helm Chart 仓库安装:
@@ -66,7 +66,7 @@ Helm 安装通常可以指定一些配置选项的值，用于覆盖默认的安
 所有安装选项可通过如下命令获取：
 
 ```shell
-helm show values --namespace polardbx-operator-system  https://github.com/ApsaraDB/galaxykube/releases/download/v1.2.2/polardbx-operator-1.2.2.tgz
+helm show values --namespace polardbx-operator-system  https://github.com/polardb/polardbx-operator/releases/download/v1.3.0/polardbx-operator-1.3.0.tgz
 ```
 
 ## 系统检查
@@ -116,12 +116,12 @@ data:
         exporter: polardbx-exporter:v1.2.0
       compute:
         init: polardbx-init:v1.2.0
-        engine: registry.cn-zhangjiakou.aliyuncs.com/drds_pre/galaxysql:20220330-2
+        engine: registry.cn-zhangjiakou.aliyuncs.com/drds_pre/polardbx-sql:20220330-2
       cdc:
-        engine: registry.cn-zhangjiakou.aliyuncs.com/drds_pre/galaxycdc:20220408
+        engine: registry.cn-zhangjiakou.aliyuncs.com/drds_pre/polardbx-cdc:20220408
       store:
         galaxy:
-          engine: galaxyengine@sha256:a1cf4aabf3e0230d6a63dd9afa125e58baa2a925462a59968ac3b918422bf521
+          engine: polardbx-engine@sha256:a1cf4aabf3e0230d6a63dd9afa125e58baa2a925462a59968ac3b918422bf521
           exporter: prom/mysqld-exporter:master
     scheduler:
       enable_master: true

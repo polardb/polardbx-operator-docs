@@ -8,7 +8,7 @@
 
 ### 更新 CRD
 
-1. 请拉取版本对应的 [CRD 文件](https://github.com/ApsaraDB/galaxykube/tree/main/charts/polardbx-operator/crds)。CRD 文件的拉取可以直接拉取源码，也可以下载 PolarDB-X Operator 对应版本的 [Release 包](https://github.com/ApsaraDB/galaxykube/releases)，解压后获取。
+1. 请拉取版本对应的 [CRD 文件](https://github.com/polardb/polardbx-operator/tree/main/charts/polardbx-operator/crds)。CRD 文件的拉取可以直接拉取源码，也可以下载 PolarDB-X Operator 对应版本的 [Release 包](https://github.com/polardb/polardbx-operator/releases)，解压后获取。
 2. 执行如下命令更新 CRD:
 ```shell
 kubectl apply -f polardbx-operator/crds

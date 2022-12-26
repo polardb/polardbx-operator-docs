@@ -26,7 +26,7 @@ kubectl create namespace polardbx-logcollector
 
 执行如下命令安装 PolarDB-X LogCollector：
 ```
- helm install --namespace polardbx-logcollector polardbx-logcollector https://github.com/ApsaraDB/galaxykube/releases/download/v1.3.0/polardbx-logcollector-1.3.0.tgz
+ helm install --namespace polardbx-logcollector polardbx-logcollector https://github.com/polardb/polardbx-operator/releases/download/v1.3.0/polardbx-logcollector-1.3.0.tgz
 ```
 
 您也可以通过 PolarDB-X 的 Helm Chart 仓库安装:
@@ -34,7 +34,7 @@ kubectl create namespace polardbx-logcollector
 helm repo add polardbx https://polardbx-charts.oss-cn-beijing.aliyuncs.com
 helm install --namespace polardbx-logcollector polardbx-logcollector polardbx/polardbx-logcollector
 ```
-> 注：默认安装配置下，Filebeat通过DaemonSet的形式安装到k8s集群的机器上，默认每个Filebeat Pod会占用占用 500MB 内存和 1 个CPU核；Logstash Pod默认部署一个，每个占用 1.5GB 内存和 2 个CPU核。具体默认可查看: [values.yaml](https://github.com/ApsaraDB/galaxykube/blob/main/charts/polardbx-logcollector/values.yaml)。
+> 注：默认安装配置下，Filebeat通过DaemonSet的形式安装到k8s集群的机器上，默认每个Filebeat Pod会占用占用 500MB 内存和 1 个CPU核；Logstash Pod默认部署一个，每个占用 1.5GB 内存和 2 个CPU核。具体默认可查看: [values.yaml](https://github.com/polardb/polardbx-operator/blob/main/charts/polardbx-logcollector/values.yaml)。
 
 期望看到如下输出：
 ```

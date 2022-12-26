@@ -14,10 +14,10 @@ spec:
     nodes:
       cn:
         template:
-          image: polardbx/galaxysql:latest
+          image: polardbx/polardbx-sql:latest
       dn:
         template:
-          image: polardbx/galaxyengine:latest
+          image: polardbx/polardbx-engine:latest
   restore:                          # 指定集群的创建方式是恢复
     backupset: pxcbackup-test       # 使用的备份集的名字
 ```

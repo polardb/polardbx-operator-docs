@@ -21,14 +21,14 @@ helm install --namespace polardbx-operator-system --set imagePullPolicy=Always p
 helm install --namespace polardbx-operator-system --set clusterDefaults.version=v1 polardbx-operator polardbx/polardbx-operator
 ```
 
-2. 覆盖组件默认 tag，例如指定 `galaxysql`的 tag 为 `v2`（其余组件仍然为 `clusterDefaults.version`的配置）：
+2. 覆盖组件默认 tag，例如指定 CN 镜像的 tag 为 `v2`（其余组件仍然为 `clusterDefaults.version`的配置）：
 
 ```bash
-helm install --namespace polardbx-operator-system --set clusterDefaults.galaxysql=galaxysql:v2 polardbx-operator polardbx/polardbx-operator
+helm install --namespace polardbx-operator-system --set clusterDefaults.galaxysql=polardbx-sql:v2 polardbx-operator polardbx/polardbx-operator
 ```
 
-3. 覆盖组件默认 repo，例如指定 `galaxysql`的 repo 为 `registry:5000`（其余组件仍然为 `imageRepo`的配置）：
+3. 覆盖组件默认 repo，例如指定 CN 的镜像 repo 为 `registry:5000`（其余组件仍然为 `imageRepo`的配置）：
 
 ```bash
-helm install --namespace polardbx-operator-system --set clusterDefaults.galaxysql=registry:5000/galaxysql polardbx-operator polardbx/polardbx-operator
+helm install --namespace polardbx-operator-system --set clusterDefaults.galaxysql=registry:5000/polardbx-sql polardbx-operator polardbx/polardbx-operator
 ```

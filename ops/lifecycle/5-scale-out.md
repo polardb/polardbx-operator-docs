@@ -17,7 +17,7 @@ polardbx-test   1/1   1/2   2/3   2/2   Upgrading  6.2Gi  93s
 ```bash
 kubectl get pxc polardbx-test -o wide
 NAME           PROTOCOL   GMS   CN    DN    CDC   PHASE     DISK       STAGE   					REBALANCE   VERSION                            AGE
-galaxy-junqi   8.0        1/1   2/2   3/3   2/2   Upgrading 22.6 GiB   RebalanceWatch   50%         8.0.3-PXC-5.4.13-20220418/8.0.18   35d
+polardbx-test  8.0        1/1   2/2   3/3   2/2   Upgrading 22.6 GiB   RebalanceWatch   50%         8.0.3-PXC-5.4.13-20220418/8.0.18   35d
 ```
 
 

@@ -32,16 +32,16 @@
 minikube 要求使用非 root 账号进行部署，如果你试用 root 账号访问机器，需要新建一个账号。
 
 ```bash
-$ useradd -ms /bin/bash galaxykube
-$ usermod -aG docker galaxykube
+$ useradd -ms /bin/bash polardbx
+$ usermod -aG docker polardbx
 ```
 
 如果你使用其他账号，请和上面一样将它加入 docker 组中，以确保它能够直接访问 docker。
 
-使用 su 切换到账号 `galaxykube`，
+使用 su 切换到账号 `polardbx`，
 
 ```bash
-$ su galaxykube
+$ su polardbx
 ```
 
 执行下面的命令启动一个 minikube，
@@ -131,7 +131,7 @@ $ kubectl create namespace polardbx-operator-system
 执行以下命令安装 PolarDB-X Operator。
 
 ```bash
-$ helm install --namespace polardbx-operator-system polardbx-operator https://github.com/ApsaraDB/galaxykube/releases/download/v1.2.1/polardbx-operator-1.2.1.tgz
+$ helm install --namespace polardbx-operator-system polardbx-operator https://github.com/polardb/polardbx-operator/releases/download/v1.2.1/polardbx-operator-1.2.1.tgz
 ```
 
 您也可以通过 PolarDB-X 的 Helm Chart 仓库安装:

@@ -15,19 +15,18 @@ PolarDB-X Operator 从 1.3.0 版本开始支持全量备份恢复功能。本文
 ### 创建 PolarDBXBackup 对象
 
 1. 参照如下示例编写 pxc-backup.yaml 文件:
-
 ```yaml
-apiVersion: polardbx.aliyun.com/v1  # API 组/版本
-kind: PolarDBXBackup                # API 名称
+apiVersion: polardbx.aliyun.com/v1  
+kind: PolarDBXBackup
 metadata:                   
-  name: pxcbackup-test             # 备份集名称
+  name: pxcbackup-test
 spec:
   cluster:
-    name: polardbx-test             # 待备份的目标 PolarDB-X 集群
-  retentionTime: 240h               # 备份集保留时间
-  storageProvider:                  # 备份使用的存储
-    storageName: sftp               # 备份集存储方式，支持 sftp 和 oss
-    sink: default                   # 存储配置项的名称
+    name: polardbx-test             
+  retentionTime: 240h
+  storageProvider:
+    storageName: sftp
+    sink: default
 ```
 
 参数说明：
