@@ -10,23 +10,17 @@
 + 已经安装了 [Helm 3](https://helm.sh/docs/intro/install/)
 
 
-首先创建一个叫 `polardbx-operator-system` 的命名空间，
-
-```bash
-$ kubectl create namespace polardbx-operator-system
-```
-
 执行以下命令安装 PolarDB-X Operator。
 
 ```bash
-$ helm install --namespace polardbx-operator-system polardbx-operator https://github.com/polardb/polardbx-operator/releases/download/v1.3.0/polardbx-operator-1.3.0.tgz
+$ helm install --namespace polardbx-operator-system --create-namespace polardbx-operator https://github.com/polardb/polardbx-operator/releases/download/v1.3.0/polardbx-operator-1.3.0.tgz
 ```
 
 您也可以通过 PolarDB-X 的 Helm Chart 仓库安装:
 
 ```bash
 helm repo add polardbx https://polardbx-charts.oss-cn-beijing.aliyuncs.com
-helm install --namespace polardbx-operator-system polardbx-operator polardbx/polardbx-operator
+helm install --namespace polardbx-operator-system --create-namespace polardbx-operator polardbx/polardbx-operator
 ```
 
 期望看到如下输出：
