@@ -6,3 +6,4 @@
    1. [重搭follower节点](./rebuild_follower.md)
    2. [重搭logger节点](./rebuild_logger.md)
    3. [重搭learner节点](./rebuild_learner.md)
+4. [自动备库重搭](./rebuild_auto.md)

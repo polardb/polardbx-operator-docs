@@ -117,6 +117,8 @@ spec:
         loose_binlog_checksum: crc32
       # DN 日志清理间隔
       logPurgeInterval: 5m
+      # 日志与数据分离存储
+      logDataSeparation: false
 
   # PolarDB-X 集群拓扑
   topology:

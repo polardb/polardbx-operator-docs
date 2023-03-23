@@ -27,6 +27,7 @@ spec:
   storageProvider:
     storageName: sftp
     sink: default
+  preferredBackupRole: follower
 ```
 
 参数说明：
@@ -34,6 +35,7 @@ spec:
 * retentionTime: 备份集保留时间，单位小时
 * storageProvider.storageName: 备份集存储方式，支持 sftp 和 oss
 * storageProvider.sink: 备份集存储配置的名称，对应[备份存储配置](./1-backup-storage-configure.md)中的 name 字段
+* preferredBackupRole( 该参数仅适用于 1.4.0 及后续版本 ): 进行备份的节点角色，可选择 `follower` 和 `leader`，默认为 `follower`；**若使用 `leader` 发起备份，可能会对业务造成影响，请谨慎配置**
 
 2.使用下面的命令创建 PolarDBXBackup 对象，触发全量备份：
 ```bash
