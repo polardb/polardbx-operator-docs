@@ -16,7 +16,7 @@ spec:																		# Spec
       cn:
         replicas: 2	
         template:
-          image: polardbx/galaxysql:latest
+          image: polardbx/polardbx-sql:latest
           resources:
             limits:
               cpu: 4
@@ -24,7 +24,7 @@ spec:																		# Spec
       dn:
         replicas: 2
         template:
-          image: polardbx/galaxyengine:latest
+          image: polardbx/polardbx-engine:latest
           resources:
             limits:
               cpu: 4
@@ -32,7 +32,7 @@ spec:																		# Spec
       cdc:
         replicas: 2
         template:
-          image: polardbx/galaxycdc:latest
+          image: polardbx/polardbx-cdc:latest
           resources:
             limits:
               cpu: 4

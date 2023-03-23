@@ -2105,13 +2105,6 @@ spec:
           optional: '[ON|OFF]'
           restart: true
           unit: STRING
-        - defaultValue: '{DBInstanceClassMemory*3/4}'
-          divisibilityFactor: 1
-          mode: readwrite
-          name: innodb_buffer_pool_size
-          optional: '[134217728-18446744073709551615]'
-          restart: true
-          unit: INT
         - defaultValue: '0'
           divisibilityFactor: 1
           mode: readwrite

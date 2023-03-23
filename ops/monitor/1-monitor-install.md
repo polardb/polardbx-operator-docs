@@ -15,16 +15,16 @@ kubectl create namespace polardbx-monitor
 ```
 
 安装 PolarDBXMonitor CRD:
-> 注意：如果您的 PolarDB-X Operator 1.2.0 是通过 helm install 直接安装的，PolarDBXMonitor 的 CRD 会默认安装，可以跳过这步。如果您的 PolarDB-X Operator 是 从1.1.0 及以下的低版本通过 helm upgrade 升级而来，需要执行如下命令手工安装：
+> 注意：如果您的 PolarDB-X Operator 1.2.0及以上 是通过 helm install 直接安装的，PolarDBXMonitor 的 CRD 会默认安装，可以跳过这步。如果您的 PolarDB-X Operator 是 从1.1.0 及以下的低版本通过 helm upgrade 升级而来，需要执行如下命令手工安装：
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/ApsaraDB/galaxykube/v1.3.0/charts/polardbx-operator/crds/polardbx.aliyun.com_polardbxmonitors.yaml
+kubectl apply -f https://raw.githubusercontent.com/polardb/polardbx-operator/v1.4.0/charts/polardbx-operator/crds/polardbx.aliyun.com_polardbxmonitors.yaml
 ```
 
 执行如下命令安装 PolarDB-X Monitor：
 
 ```bash
- helm install --namespace polardbx-monitor polardbx-monitor polardbx-monitor-1.2.0.tgz
+ helm install --namespace polardbx-monitor polardbx-monitor polardbx-monitor-1.4.0.tgz
 ```
 
 您也可以通过 PolarDB-X 的 Helm Chart 仓库安装:

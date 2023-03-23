@@ -2,7 +2,7 @@
 
 举个例子，我们将同时
 
-1. 修改 CN 的镜像为 polardbx/galaxysql:v2.0 
+1. 修改 CN 的镜像为 polardbx/polardbx-sql:v2.0 
 2. 修改 CDC 的配置为 8C32G
 3. 增加 DN 的节点，到 3 个
 
@@ -16,7 +16,7 @@ spec:
     nodes:
       cn:
         template:
-          image: polardbx/galaxysql:v2.0
+          image: polardbx/polardbx-sql:v2.0
       dn:
         replicas: 3
       cdc:
@@ -38,13 +38,13 @@ kubectl patch pxc polardbx-test --patch-file patch.yaml
 ```bash
 kubectl get pxc polardbx-test -o wide
 NAME           PROTOCOL   GMS   CN    DN    CDC   PHASE     DISK       STAGE   					REBALANCE   VERSION                            AGE
-galaxy-junqi   8.0        1/1   1/2   2/3   1/2   Upgrading 22.6 GiB                                8.0.3-PXC-5.4.13-20220418/8.0.18   35d
+polardbx-test  8.0        1/1   1/2   2/3   1/2   Upgrading 22.6 GiB                                8.0.3-PXC-5.4.13-20220418/8.0.18   35d
 ```
 
 ```bash
 kubectl get pxc polardbx-test -o wide
 NAME           PROTOCOL   GMS   CN    DN    CDC   PHASE     DISK       STAGE   					REBALANCE   VERSION                            AGE
-galaxy-junqi   8.0        1/1   2/2   3/3   2/2   Upgrading 22.6 GiB   RebalanceWatch   50%         8.0.3-PXC-5.4.13-20220418/8.0.18   35d
+polardbx-test  8.0        1/1   2/2   3/3   2/2   Upgrading 22.6 GiB   RebalanceWatch   50%         8.0.3-PXC-5.4.13-20220418/8.0.18   35d
 ```
 
 注：如《[不可中断的情况](./7-rollback-exception.md) 》中所说，数据搬迁中不可中断。

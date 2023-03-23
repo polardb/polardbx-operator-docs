@@ -25,7 +25,7 @@
               limits:
                 cpu: 2
                 memory: 4Gi
-            image: polardbx/galaxysql:latest
+            image: polardbx/polardbx-sql:latest
             imagePullPolicy: Always
         dn:
           # DN replicas 会自动与主实例的 DN replicas 保持同步，无需显式指定
@@ -34,7 +34,7 @@
               limits:
                 cpu: 2
                 memory: 4Gi
-            image: polardbx/galaxyengine:latest
+            image: polardbx/polardbx-engine:latest
             imagePullPolicy: IfNotPresent
     config:
       cn:
@@ -64,7 +64,7 @@
               limits:
                 cpu: 2
                 memory: 4Gi
-            image: polardbx/galaxysql:latest
+            image: polardbx/polardbx-sql:latest
             imagePullPolicy: Always
         dn:
           replicas: 1
@@ -73,7 +73,7 @@
               limits:
                 cpu: 2
                 memory: 4Gi
-            image: polardbx/galaxyengine:latest
+            image: polardbx/polardbx-engine:latest
             imagePullPolicy: IfNotPresent
   ```
 
