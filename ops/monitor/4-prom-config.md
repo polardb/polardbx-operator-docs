@@ -2,13 +2,13 @@
 PolarDB-X Monitor 的 helm chart 采用了默认的 Prometheus 和 Grafana 配置，如果您想修改相关配置，可以使用如下的命令安装或者升级 PolarDB-X Monitor，通过 values.yaml 覆盖默认的配置。
 
 ```shell
-helm install --namespace polardbx-monitor polardbx-monitor polardbx-monitor-1.2.0.tgz -f values.yaml
+helm install --namespace polardbx-monitor polardbx-monitor polardbx-monitor-1.4.0.tgz -f values.yaml
 ```
 
 或者：
 
 ```shell
-helm upgrade --namespace polardbx-monitor polardbx-monitor polardbx-monitor-1.2.0.tgz -f values.yaml
+helm upgrade --namespace polardbx-monitor polardbx-monitor polardbx-monitor-1.4.0.tgz -f values.yaml
 ```
 
 values.yaml 文件包含了 Prometheus 和 Grafana 的相关配置项，下面针对常见的几种场景给出配置示例，详细的配置列表详见：[values.yaml](https://github.com/polardb/polardbx-operator/blob/main/charts/polardbx-monitor/values.yaml) 。

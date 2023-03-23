@@ -8,11 +8,14 @@
       mycnfOverwrite: |-
         loose_binlog_checksum: crc32
       logPurgeInterval: 5m
+      logDataSeparation: false
 ```
 
 注意：如果部分my.cnf 参数需要重启后才能生效，需要手动重启 DN 的 mysql 进程。
 
-非 my.cnf 参数目前只支持设置 binlog的清理时间，修改 .spec.config.dn.logPurgeInterval 即可。
+非 my.cnf 参数目前支持设置: 
+- binlog的清理时间，修改 .spec.config.dn.logPurgeInterval 即可。
+- 日志与数据是否分离存储，修改 .spec.config.dn.logDataSeparation 即可
 
 ## Set Global 指令
 除了修改yaml 外，也可以通过 CN 的 set global 指令修改 DN 参数，登录CN，执行如下SQL：
