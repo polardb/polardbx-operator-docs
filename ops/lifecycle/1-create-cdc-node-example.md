@@ -36,7 +36,7 @@ spec:
             requests:
               cpu: 500m
               memory: 500Mi
-          image: polardbx/galaxycdc:latest
+          image: polardbx/polardbx-cdc:latest
       cn:
         replicas: 1
         template:
@@ -47,7 +47,7 @@ spec:
             requests:
               cpu: 500m
               memory: 1Gi
-          image: polardbx/galaxysql:latest
+          image: polardbx/polardbx-sql:latest
       dn:
         replicas: 2
         template:
@@ -59,7 +59,7 @@ spec:
             requests:
               cpu: 500m
               memory: 500Mi
-          image: polardbx/galaxyengine:latest
+          image: polardbx/polardbx-engine:latest
       gms:
         template:
           engine: galaxy
@@ -70,7 +70,7 @@ spec:
             requests:
               cpu: 500m
               memory: 500Mi
-          image: polardbx/galaxyengine:latest
+          image: polardbx/polardbx-engine:latest
   ```
 注：目前 `PolarDB-X Operator` 仅支持拉起单个多流group，并且需要同时拉起全局Binlog。
 
