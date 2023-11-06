@@ -11,6 +11,14 @@
 | 错误日志 | /home/admin/drds-server/logs/*/tddl.log | 否 |
 >容器内路径中的*表示任意目录名
 
+### 数据节点的日志
+| 日志 | Pod内路径 | 是否进行了解析 |
+| --- | --- |---|
+| 审计日志 | /data/mysql/tmp/*.alog| 是|
+| 慢日志 | /data/mysql/data/mysql/slow_log_*.CSV | 是 |
+| 错误日志| /data/mysql/log/alert.log | 否|
+>容器内路径中的*表示匹配任意字符
+
 ## 安装 PolarDB-X LogCollector
 PolarDB-X通过Filebeat采集日志，将原始日志发送到Logstash进行解析并发送给最后的存储端。
 ### 前置要求
@@ -57,6 +65,15 @@ kubectl patch pxc {pxc name} --patch '{"spec":{"config":{"cn":{"enableAuditLog":
 关闭 PolarDB-X 实例的 CN 节点日志采集：
 ```
 kubectl patch pxc {pxc name} --patch '{"spec":{"config":{"cn":{"enableAuditLog":false}}}}' --type merge
+```
+
+打开 PolarDB-X 实例的 DN 节点日志采集：
+```
+kubectl patch pxc {pxc name} --patch '{"spec":{"config":{"dn":{"enableAuditLog":true}}}}' --type merge
+```
+关闭 PolarDB-X 实例的 DN 节点日志采集：
+```
+kubectl patch pxc {pxc name} --patch '{"spec":{"config":{"dn":{"enableAuditLog":false}}}}' --type merge
 ```
 
 ### 在 Logstash 标准输出查看日志
@@ -151,6 +168,10 @@ output {
 | SQL日志 | cn_sql_log-* |
 | 慢日志 | cn_slow_log-* |
 | 错误日志 | cn_tddl_log-* |
+|DN 审计日志| dn_audit_log-*|
+|DN 慢日志| dn_slow_log-*|
+|DN 错误日志| dn_error_log-*|
+
 
 Kibana 创建 Index Pattern 如下图所示：
 ![kibana-create-index](images/kibana-create-index.png)
@@ -163,6 +184,16 @@ SQL日志
 
 慢日志
 ![undefined](images/slow-log-result.png)
+
+DN 审计日志
+![undefined](images/dn-audit-log-result.png)
+
+DN 错误日志
+![undefined](images/dn-error-log-result.png)
+
+DN 慢日志
+![undefined](images/dn-slow-log-result.png)
+
 
 ### 其他
 - [已有输出的插件](https://www.elastic.co/guide/en/logstash/current/output-plugins.html)
@@ -189,6 +220,8 @@ ConfigMap名称为filebeat-config。
 参数：
 - SQL日志配置项里的harvester_buffer_size大小
 - queue.mem配置
+- prospector.scanner.check_interval大小
+- close.reader.after_interval 大小
 
 参考：[filebeat配置](https://www.elastic.co/guide/en/beats/filebeat/current/configuring-howto-filebeat.html)
 

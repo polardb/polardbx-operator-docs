@@ -1,6 +1,6 @@
 # polardbx.aliyun.com/v1 PolarDBXCluster
 
-使用 PolarDBXCluster 可以自由定义集群的拓扑、规格和配置，可以支持超大规模和不同容灾等级的部署。
+使用 PolarDBXCluster 可以自由定义PolarDB-X 企业版集群的拓扑、规格和配置，可以支持超大规模和不同容灾等级的部署。
 
 以下是可配置项及相关的字段的含义：
 
@@ -237,7 +237,7 @@ spec:
           # 存储节点引擎，默认 galaxy
           engine: galaxy
           # 存储节点镜像，默认由 operator 指定
-          image: polardbx-engine:latest
+          image: polardbx-engine-2.0:latest
           # 存储节点 Service 类型，默认为 ClusterIP
           serviceType: ClusterIP
           # 存储节点 Pod 是否适用宿主机网络，默认为 true
@@ -287,4 +287,18 @@ spec:
             limits:
               cpu: 4
               memory: 8Gi
+        groups:
+        - name: "group1"
+          replicas: 1
+          template:
+            image: polardbx-cdc:latest
+            hostNetwork: false
+            resources:
+              limits:
+                cpu: 4
+                memory: 8Gi
+          config:
+            envs:
+              cluster_type: "BINLOG_X"
+              binlogx_stream_group_name: "group1"
 ```

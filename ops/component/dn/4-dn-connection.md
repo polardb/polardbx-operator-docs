@@ -3,7 +3,7 @@
 密码通过如下命令获取：
 
 ```shell
-kubectl get secret {dn 名} -o jsonpath={.data.admin} | base64 -d - | xargs echo "Password"
+kubectl get secret {dn 名} -o jsonpath={.data.admin} | base64 -d | xargs echo "Password"
 ```
 
 ## 获取连接串

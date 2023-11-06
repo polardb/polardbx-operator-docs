@@ -125,7 +125,7 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 执行以下命令安装 PolarDB-X Operator。
 
 ```bash
-$ helm install --namespace polardbx-operator-system --create-namespace polardbx-operator https://github.com/polardb/polardbx-operator/releases/download/v1.2.1/polardbx-operator-1.2.1.tgz 
+$ helm install --namespace polardbx-operator-system --create-namespace polardbx-operator https://github.com/polardb/polardbx-operator/releases/download/v1.5.0/polardbx-operator-1.5.0.tgz
 ```
 
 您也可以通过 PolarDB-X 的 Helm Chart 仓库安装:
@@ -159,7 +159,9 @@ metadata:
   name: quick-start
   annotations:
     polardbx/topology-mode-guide: quick-start
+```.
 ```
+
 
 查看 PolarDB-X Operator 组件的运行情况，等待它们都进入 Running 状态：
 
@@ -175,7 +177,11 @@ polardbx-tools-updater-459lc                   1/1     Running   0          66s
 
 # 部署 PolarDB-X 集群
 
-现在我们来快速部署一个 PolarDB-X 集群，它包含 1 个 GMS 节点、1 个 CN 节点、1 个 DN 节点和 1 个 CDC 节点。执行以下命令创建一个这样的集群：
+PolarDB-X目前包含企业版和标准版两个系列，您可以根据实际的需求创建对应的集群。
+
+## 部署 PolarDB-X 企业版集群
+PolarDB-X 企业版是分布式架构集群，支持更大数据量，面向具备企业级超高并发、大规模数据复杂查询、加速分析的业务场景。
+现在我们来快速部署一个 PolarDB-X 企业版集群，它包含 1 个 GMS 节点、1 个 CN 节点、1 个 DN 节点和 1 个 CDC 节点。执行以下命令创建一个这样的集群：
 
 ```bash
 echo "apiVersion: polardbx.aliyun.com/v1
@@ -204,6 +210,59 @@ quick-start   1/1   1/1   1/1   1/1   Running    2.4 GiB   4m44s
 ```
 
 当 PHASE 显示为 Running 时，PolarDB-X 集群已经部署完成！恭喜你，现在可以开始连接并体验 PolarDB-X 分布式数据库了！
+
+## 部署 PolarDB-X 标准版集群
+
+PolarDB-X 标准版采用一主一备一日志的三节点架构，性价比高，通过多副本同步复制，确保数据的强一致性。面向具备超高并发、复杂查询及轻量分析的在线业务场景。
+现在我们来快速部署一个 PolarDB-X 标准版集群，它仅包含 1 个由三副本组成的DN节点。执行以下命令创建一个这样的集群：
+
+```shell
+echo "apiVersion: polardbx.aliyun.com/v1
+kind: XStore
+metadata:
+  name: quick-start
+spec:
+  config:
+    controller:
+      RPCProtocolVersion: 1
+  topology:
+    nodeSets:
+    - name: cand
+      replicas: 2
+      role: Candidate
+      template:
+        spec:
+          image: polardbx/polardbx-engine-2.0:latest
+          resources:
+            limits:
+              cpu: "2"
+              memory: 4Gi
+    - name: log
+      replicas: 1
+      role: Voter
+      template:
+        spec:
+          image: polardbx/polardbx-engine-2.0:latest
+          resources:
+            limits:
+              cpu: "1"
+              memory: 2Gi" | kubectl apply -f -
+```
+你将看到以下输出：
+
+```bash
+xstore.polardbx.aliyun.com/quick-start created
+```
+
+使用如下命令查看创建状态：
+
+```bash
+$ kubectl get xstore -w
+NAME          LEADER                    READY   PHASE     DISK      VERSION   AGE
+quick-start   quick-start-4dbh-cand-0   3/3     Running   3.6 GiB   8.0.18    11m
+```
+当 PHASE 显示为 Running 时，PolarDB-X 标准版集群已经部署完成！恭喜你，现在可以开始连接并体验 PolarDB-X 数据库了！
+
 
 # 连接 PolarDB-X 集群
 
@@ -234,7 +293,8 @@ $ kubectl port-forward svc/quick-start 3306
 
 ## 连接 PolarDB-X 集群
 
-Operator 将为 PolarDB-X 集群默认创建一个账号 polardbx_root，并将密码存放在 secret 中。
+### 连接 PolarDB-X 企业版
+Operator 将为 PolarDB-X 企业版集群默认创建一个账号 polardbx_root，并将密码存放在 secret 中。
 
 使用以下命令查看 polardbx_root 账号的密码：
 
@@ -267,7 +327,25 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 mysql>
 ```
 
-恭喜！你已经成功地部署并连接到了一个 PolarDB-X 分布式数据库集群，现在你可以开始体验分布式数据库的能力了！
+恭喜！你已经成功地部署并连接到了一个 PolarDB-X 企业版数据库集群，现在你可以开始体验分布式数据库的能力了！
+
+### 连接 PolarDB-X 标准版
+
+Operator 将为 PolarDB-X 标准版集群默认创建一个账号 admin，并将密码存放在 secret 中。
+
+使用以下命令查看 admin 账号的密码：
+
+```bash
+$ kubectl get secret quick-start -o jsonpath="{.data['admin']}" | base64 -d - | xargs echo "Password: "
+Password:  bvp9wjxx
+```
+
+保持 port-forward 的运行，重新打开一个终端，执行如下命令连接集群：
+
+```bash
+$ mysql -h127.0.0.1 -P3306 -uadmin -pbvp9wjxx
+```
+即可连接到 PolarDB-X 标准版。
 
 # 销毁 PolarDB-X 集群
 

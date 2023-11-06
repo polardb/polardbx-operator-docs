@@ -5,8 +5,10 @@ PolarDB-X Operator从1.3.0版本开始支持参数模板功能
 
 参数模板需要通过yaml文件的形式进行配置。
 
+注：参数模板需要配置在PolarDBXCluster所在的namespace中
+
 ```shell
-kubectl apply -f {参数模板文件名称}.yaml
+kubectl apply -f {参数模板文件名称}.yaml --namespace={PolarDBXCluster所在namespace}
 ```
 
 ### 参数模板说明
@@ -65,14 +67,14 @@ spec:
 
 ### 查看参数模板
 
-实例会默认在default namespace中应用[8.0版本的参数模板](./3-parameter-template8.0.yaml)，如果想在其他namespace创建实例，需要在相应的的namespace中创建参数模板对象。
+实例会默认在polardbx-operator-system namespace中应用[8.0版本的参数模板](https://github.com/polardb/polardbx-operator/blob/main/charts/polardbx-operator/templates/parameter-template-product.yaml)，如果想在其他namespace创建实例，需要在相应的的namespace中创建参数模板对象。
 
 可以通过如下命令查看已配置的所有参数模板。
 
 ```shell
-kubectl get PolarDBXParameterTemplate
+kubectl get PolarDBXParameterTemplate --namespace=polardbx-operator-system
 # 或者可用简称
-kubectl get pxpt
+kubectl get pxpt --namespace=polardbx-operator-system
 ```
 
 ### PolarDBXCluster配置

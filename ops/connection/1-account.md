@@ -3,7 +3,7 @@ PolarDB-X 默认的 root 账号都是: polardbx_root，您在登录后可以通�
 polardbx_root 账号的密码随机生成，执行下面的命令获取 PolarDB-X root 账号的密码：
 
 ```shell
-kubectl get secret {PolarDB-X 集群名} -o jsonpath="{.data['polardbx_root']}" | base64 -d - | xargs echo "Password: "
+kubectl get secret {PolarDB-X 集群名} -o jsonpath="{.data['polardbx_root']}" | base64 -d | xargs echo "Password: "
 ```
 
 期望输出：

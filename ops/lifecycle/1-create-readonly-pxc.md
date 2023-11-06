@@ -34,7 +34,7 @@
               limits:
                 cpu: 2
                 memory: 4Gi
-            image: polardbx/polardbx-engine:latest
+            image: polardbx/polardbx-engine-2.0:latest
             imagePullPolicy: IfNotPresent
     config:
       cn:
@@ -73,7 +73,7 @@
               limits:
                 cpu: 2
                 memory: 4Gi
-            image: polardbx/polardbx-engine:latest
+            image: polardbx/polardbx-engine-2.0:latest
             imagePullPolicy: IfNotPresent
   ```
 

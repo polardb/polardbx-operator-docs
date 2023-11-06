@@ -10,7 +10,7 @@ PolarDB-X Operator 从 1.4.0 版本开始支持指定时间点恢复。本文介
 3. 恢复的时间点之前存在一个全量备份集
 4. 全量备份集中的恢复时间到指定的恢复时间之间有连续的增量日志文件
 
-## 恢复 PolarDB-X 集群
+## 相同K8S集群恢复 PolarDB-X 集群
 
 ```yaml
 apiVersion: polardbx.aliyun.com/v1
@@ -32,10 +32,49 @@ spec:
     time: "2023-03-20T02:06:46Z"    # 恢复的时间点
 ```
 
-参照上述示例编写恢复用的yaml文件，这里需要注意指定创建方式是`restore`，通过以下命令进行恢复：
+参照上述示例编写恢复用的yaml文件，通过以下命令进行恢复：
 
 ```bash
 kubectl apply -f pxc-pitr-restore.yaml
+```
+
+## 跨K8S集群恢复 PolarDB-X 集群
+```yaml
+apiVersion: polardbx.aliyun.com/v1
+kind: PolarDBXCluster
+metadata:
+  name: pxc-pitr-restore-cross   # 恢复出的集群名字
+spec:
+  topology: # 集群规格
+    nodes:
+      cn:
+        template:
+          image: polardbx/galaxysql:latest
+      dn:
+        template:
+          image: polardbx/galaxyengine:latest 
+  restore:  # 指定集群的创建方式是恢复
+    storageProvider:   # 数据备份集的存储配置
+      storageName: xxx 
+      sink: xxx
+    from:
+      backupSetPath: "polardbx-backup/polardb-x/pxcbackup-xxx"  #备份集的远程存储路径
+    time: "2023-10-20T05:57:56Z"   # 恢复的时间点
+    binlogSource:
+      namespace: default  # 日志备份集的源实例的namespace，用于确定备份文件的路径
+      storageProvider:    # 日志备份集的存储配置
+        storageName: xx
+        sink: xxx
+```
+参数说明
+* restore.from.backupSetPath: 数据备份集的远程存储路径
+* restore.storageProvider: 数据备份使用的存储配置，可参照[集群备份](./2-cluster-backup.md)
+* restore.binlogSource: 日志备份的来源，包括源实例的namespace和存储配置
+
+参照上述示例编写恢复用的yaml文件，通过以下命令进行恢复：
+
+```bash
+kubectl apply -f pxc-pitr-restore-cross.yaml
 ```
 
 > 注意：
