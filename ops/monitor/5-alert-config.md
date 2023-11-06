@@ -88,26 +88,14 @@ AlertManager 目前还没有直接支持钉钉，如果需要发送消息到钉�
 
 1. 在钉钉群中创建一个 webhook 机器人，并记录下 webhook 的 url 和 secret。
 2. 创建 dingtalk-webhook.yaml, 并复制如下内容到dingtalk-webhook.yaml中：
+
 ```yaml
 apiVersion: v1
 data:
   config.yaml: |
-    ##
-    # This config is for prometheus-webhook-dingtalk instead of Kubernetes!
-    ##
-
-    ## Request timeout
-    # timeout: 5s
-
-    ## Customizable templates path
     templates:
       - /config/template.tmpl
 
-    ## You can also override default template using `default_message`
-    ## The following example to use the 'legacy' template from v0.3.0
-    # default_message:
-    #   title: '{{ template "legacy.title" . }}'
-    #   text: '{{ template "legacy.content" . }}'
     targets:
       webhook1:
         # 修改这边的url 和 secret即可
@@ -174,7 +162,7 @@ spec:
     run: dingtalk
   sessionAffinity: None
 ```
-> 注意：24行的 url 和 secret字段为你配置的钉钉机器人配置。
+注意：24行的 url 和 secret字段为你配置的钉钉机器人配置。
 
 2. 执行如下命令，部署钉钉报警插件：
 ```shell
@@ -186,6 +174,7 @@ kubectl apply -f dingtalk-webhook.yaml
 vim alertmanger-secret.yaml
 ```
 拷贝如下内容到 alertmanger-secret.yaml中：
+
 ```yaml
 apiVersion: v1
 kind: Secret
@@ -229,7 +218,7 @@ kubectl apply -f alertmanger-secret.yaml
 
 方法 1：参考文档：[查看监控](https://doc.polardbx.com/operator/ops/monitor/3-monitoring.html) 访问Prometheus 控制台，查看 Alerts Tab 页面，即可查看到系统重已配置的告警项。如下图所示：
 
-![](./alert-rules.png)
+<img src="./alert-rules.png" width = "40%" height = "40%" alt="alert-rules"/>
 
 方法2：
 

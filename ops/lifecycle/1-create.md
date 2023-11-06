@@ -24,7 +24,7 @@ spec:																		# Spec
       dn:
         replicas: 2
         template:
-          image: polardbx/polardbx-engine:latest
+          image: polardbx/polardbx-engine-2.0:latest
           resources:
             limits:
               cpu: 4

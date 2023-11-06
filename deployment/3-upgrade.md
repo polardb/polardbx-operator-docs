@@ -14,15 +14,26 @@
 kubectl apply -f polardbx-operator/crds
 ```
 
+### 更新本地helm仓库
+
+```bash
+helm repo update
+```
+
+### 查看仓库中的版本列表
+
+```bash
+helm search repo polardbx -l
+```
 
 ### 升级 Operator
 
 ```bash
-helm upgrade --namespace polardbx-operator-system polardbx/polardbx-operator
+helm upgrade --namespace polardbx-operator-system polardbx-operator polardbx/polardbx-operator
 ```
 
 可以同时指定 values.yaml：
 
 ```bash
-helm upgrade --namespace polardbx-operator-system -f values.yaml polardbx/polardbx-operator
+helm upgrade --namespace polardbx-operator-system polardbx-operator -f values.yaml polardbx/polardbx-operator
 ```

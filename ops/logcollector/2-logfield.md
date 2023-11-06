@@ -1,6 +1,6 @@
 # 日志字段说明
 本文介绍如何在logstash上报的日志内容中，各字段的说明。
-## SQL日志
+## CN 审计日志
 ### 字段说明
 | **字段组** | **字段名称** | **描述**                                                             |
 | --- | --- |--------------------------------------------------------------------|
@@ -82,7 +82,7 @@
 }
 ```
 
-## 慢日志
+## CN 慢日志
 ### 字段说明
 | **字段组** | **字段名称** | **描述** |
 | --- | --- | --- |
@@ -153,7 +153,7 @@
 }
 ```
 
-## 错误日志
+## CN 错误日志
 ### 字段说明
 | **字段组** | **字段名称** | **描述** |
 | --- | --- | --- |
@@ -162,7 +162,7 @@
 |  | node_name | 计算节点pod所在的node名称。 |
 |  | pod_name | 计算节点pod名称。 |
 |  / | logger | 打印者名称。 |
-|  | loglevel | 日子级别 |
+|  | loglevel | 日志级别 |
 |  | message | 错误内容 |
 |  | thread | 线程名称 |
 
@@ -202,5 +202,419 @@
   "sort": [
     1660030456157
   ]
+}
+```
+
+## DN 审计日志
+### 字段说明
+
+| **字段组** | **字段名称** | **描述** |
+| --- | --- | --- |
+| fields | instance_id | 实例名称。 |
+|  | dn_instance_id | xstore 名称。 |
+|  | log_type | 日志类型。 |
+|  | node_name | 数据节点pod所在的node名称。 |
+|  | pod_name | 数据节点pod名称。 |
+|  / | version | rds审计日志版本 |
+|  | thread_id | 线程id |
+|  | host_or_ip | 主机名或 IP 地址 |
+|  | db |  查询所使用的数据库|
+|  | start_utime | 查询开始的时间戳, us |
+|  | transaction_utime | 事务执行花费的时间, us |
+|  | error_code | 错误代码 |
+|  | time_cost_us | 查询执行耗时, us |
+|  | send_rows |  查询返回的行数 |
+|  | updated_rows | 查询更新的行数 |
+|  | examined_rows | 查询扫描的行数 |
+|  | memory_used |  使用的内存大小 |
+|  | memory_used_by_query | 查询执行过程中使用的内存大小 |
+|  | logical_read | 查询执行过程中逻辑读取的次数  |
+|  | physical_sync_read |  查询执行过程中同步物理读取的次数 |
+|  | physical_async_read | 查询执行过程中异步物理读取的次数 |
+|  | temp_user_table_size |  临时用户表的大小 |
+|  | temp_sort_table_size |  临时排序表的大小 |
+|  | temp_sort_file_size | 临时排序文件的大小 |
+|  | sql_command |  SQL 命令，整型数 |
+|  | is_super | 查询的用户是否是超级用户  |
+|  | lock_wait_time_us | 查询等待锁的时间，us |
+|  | log_message | 查询执行的 SQL 命令 |
+
+>点击[SQL Audit Plugin](https://aliyuque.antfin.com/mysql/release_notes/feature_sql_audit_plugin?singleDoc#)查看审计日志格式
+### 例子
+```json
+{
+  "@timestamp": [
+    "2023-08-22T08:21:02.865Z"
+  ],
+  "@version": [
+    "1"
+  ],
+  "@version.keyword": [
+    "1"
+  ],
+  "db": [
+    "null"
+  ],
+  "db.keyword": [
+    "null"
+  ],
+  "error_code": [
+    0
+  ],
+  "examined_rows": [
+    1
+  ],
+  "fields.dn_instance_id": [
+    "pxc-yd-1-jk87-gms"
+  ],
+  "fields.dn_instance_id.keyword": [
+    "pxc-yd-1-jk87-gms"
+  ],
+  "fields.instance_id": [
+    "pxc-yd-1"
+  ],
+  "fields.instance_id.keyword": [
+    "pxc-yd-1"
+  ],
+  "fields.log_type": [
+    "dn_audit_log"
+  ],
+  "fields.log_type.keyword": [
+    "dn_audit_log"
+  ],
+  "fields.node_name": [
+    "cn-zhangjiakou.10.0.0.72"
+  ],
+  "fields.node_name.keyword": [
+    "cn-zhangjiakou.10.0.0.72"
+  ],
+  "fields.pod_name": [
+    "pxc-yd-1-jk87-gms-log-0"
+  ],
+  "fields.pod_name.keyword": [
+    "pxc-yd-1-jk87-gms-log-0"
+  ],
+  "host_or_ip": [
+    "localhost"
+  ],
+  "host_or_ip.keyword": [
+    "localhost"
+  ],
+  "host.name": [
+    "filebeat-c2lpd"
+  ],
+  "host.name.keyword": [
+    "filebeat-c2lpd"
+  ],
+  "is_super": [
+    1
+  ],
+  "lock_wait_time_us": [
+    82
+  ],
+  "log_message": [
+    "SELECT ROLE, SERVER_READY_FOR_RW FROM information_schema.ALISQL_CLUSTER_LOCAL"
+  ],
+  "log_message.keyword": [
+    "SELECT ROLE, SERVER_READY_FOR_RW FROM information_schema.ALISQL_CLUSTER_LOCAL"
+  ],
+  "logical_read": [
+    0
+  ],
+  "memory_used": [
+    0
+  ],
+  "memory_used_by_query": [
+    0
+  ],
+  "physical_async_read": [
+    0
+  ],
+  "physical_sync_read": [
+    0
+  ],
+  "send_rows": [
+    1
+  ],
+  "sql_command": [
+    0
+  ],
+  "start_utime": [
+    1692692462865465
+  ],
+  "tags": [
+    "beats_input_codec_plain_applied"
+  ],
+  "tags.keyword": [
+    "beats_input_codec_plain_applied"
+  ],
+  "temp_sort_file_size": [
+    0
+  ],
+  "temp_sort_table_size": [
+    0
+  ],
+  "temp_user_table_size": [
+    0
+  ],
+  "thread_id": [
+    285512
+  ],
+  "time_cost_us": [
+    179
+  ],
+  "transaction_utime": [
+    0
+  ],
+  "updated_rows": [
+    0
+  ],
+  "user": [
+    "root"
+  ],
+  "user.keyword": [
+    "root"
+  ],
+  "version": [
+    "MYSQL_V1"
+  ],
+  "version.keyword": [
+    "MYSQL_V1"
+  ],
+  "_id": "EkZVHIoBThSFx_rRSm7n",
+  "_index": "dn_audit_log-2023.08.22",
+  "_score": null
+}
+```
+
+## DN 慢日志
+### 字段说明
+| **字段组** | **字段名称** | **描述** |
+| --- | --- | --- |
+| fields | instance_id | 实例名称。 |
+|  | dn_instance_id | xstore名称。 |
+|  | log_type | 日志类型。 |
+|  | node_name | 数据节点pod所在的node名称。 |
+|  | pod_name | 数据节点pod名称。 |
+|  / | start_time | 查询开始时 |
+|  | user_host | 执行查询的用户和主机名 |
+|  | query_time_us | 查询执行的时间, us |
+|  | lock_time_us | 查询在等待锁的时间, us |
+|  | rows_sent | 查询返回的行数 |
+|  | rows_examined | 查询扫描的行数 |
+|  | db | 查询所使用的数据库|
+|  | last_insert_id | 最后一次插入操作生成的 ID |
+|  | insert_id | 当前查询生成的 ID |
+|  | server_id | 服务器 ID|
+|  | sql_text | 查询语句文本 |
+|  | thread_id | 执行查询的线程 ID |
+>可以查看mysql库的slow_log表查看每个字段，其中`query_time`与`lock_time`被转换为us为单位的整数，分别存储到`query_time_us`与`lock_time_us`中
+### 例子
+```json
+{
+  "@timestamp": [
+    "2023-08-22T08:28:42.516Z"
+  ],
+  "@version": [
+    "1"
+  ],
+  "@version.keyword": [
+    "1"
+  ],
+  "db": [
+    ""
+  ],
+  "db.keyword": [
+    ""
+  ],
+  "fields.dn_instance_id": [
+    "pxc-yd-1-jk87-dn-0"
+  ],
+  "fields.dn_instance_id.keyword": [
+    "pxc-yd-1-jk87-dn-0"
+  ],
+  "fields.instance_id": [
+    "pxc-yd-1"
+  ],
+  "fields.instance_id.keyword": [
+    "pxc-yd-1"
+  ],
+  "fields.log_type": [
+    "dn_slow_log"
+  ],
+  "fields.log_type.keyword": [
+    "dn_slow_log"
+  ],
+  "fields.node_name": [
+    "cn-zhangjiakou.10.0.0.73"
+  ],
+  "fields.node_name.keyword": [
+    "cn-zhangjiakou.10.0.0.73"
+  ],
+  "fields.pod_name": [
+    "pxc-yd-1-jk87-dn-0-cand-1"
+  ],
+  "fields.pod_name.keyword": [
+    "pxc-yd-1-jk87-dn-0-cand-1"
+  ],
+  "host.name": [
+    "filebeat-tvlxq"
+  ],
+  "host.name.keyword": [
+    "filebeat-tvlxq"
+  ],
+  "insert_id": [
+    0
+  ],
+  "last_insert_id": [
+    0
+  ],
+  "lock_time_us": [
+    0
+  ],
+  "query_time_us": [
+    2000206
+  ],
+  "rows_examined": [
+    0
+  ],
+  "rows_sent": [
+    1
+  ],
+  "server_id": [
+    3169933882
+  ],
+  "sql_text": [
+    "select sleep(2)"
+  ],
+  "sql_text.keyword": [
+    "select sleep(2)"
+  ],
+  "start_time": [
+    "2023-08-22 16:28:42.516694"
+  ],
+  "start_time.keyword": [
+    "2023-08-22 16:28:42.516694"
+  ],
+  "tags": [
+    "beats_input_codec_plain_applied"
+  ],
+  "tags.keyword": [
+    "beats_input_codec_plain_applied"
+  ],
+  "thread_id": [
+    1276945
+  ],
+  "user_host": [
+    "root[root] @ localhost [127.0.0.1]"
+  ],
+  "user_host.keyword": [
+    "root[root] @ localhost [127.0.0.1]"
+  ],
+  "_id": "SF1fHIoBThSFx_rRBfoo",
+  "_index": "dn_slow_log-2023.08.22",
+  "_score": null
+}
+```
+
+## DN 错误日志
+### 字段说明
+| **字段组** | **字段名称** | **描述** |
+| --- | --- | --- |
+| fields | instance_id | 实例名称。 |
+|  | dn_instance_id | xstore名称。 |
+|  | log_type | 日志类型。 |
+|  | node_name | 数据节点pod所在的node名称。 |
+|  | pod_name | 数据节点pod名称。 |
+|  / | thread | 线程号，可为空 |
+|  | label | 日志级别 |
+|  | error_code | 错误码，可为空|
+|  | subsystem | 子系统组件，可为空 |
+|  | log_msg | 错误消息内容 |
+>mysql版本以及不同级别的日志格式不同，因此某些字段可能为空，此时该字段不存在，并非有空值。
+### 例子
+```json
+{
+  "@timestamp": [
+    "2023-08-22T08:44:02.571Z"
+  ],
+  "@version": [
+    "1"
+  ],
+  "@version.keyword": [
+    "1"
+  ],
+  "error_code": [
+    "MY-011825"
+  ],
+  "error_code.keyword": [
+    "MY-011825"
+  ],
+  "fields.dn_instance_id": [
+    "ddd-w58x-dn-0"
+  ],
+  "fields.dn_instance_id.keyword": [
+    "ddd-w58x-dn-0"
+  ],
+  "fields.instance_id": [
+    "ddd"
+  ],
+  "fields.instance_id.keyword": [
+    "ddd"
+  ],
+  "fields.log_type": [
+    "dn_error_log"
+  ],
+  "fields.log_type.keyword": [
+    "dn_error_log"
+  ],
+  "fields.node_name": [
+    "cn-zhangjiakou.10.0.0.73"
+  ],
+  "fields.node_name.keyword": [
+    "cn-zhangjiakou.10.0.0.73"
+  ],
+  "fields.pod_name": [
+    "ddd-w58x-dn-0-cand-1"
+  ],
+  "fields.pod_name.keyword": [
+    "ddd-w58x-dn-0-cand-1"
+  ],
+  "host.name": [
+    "filebeat-tvlxq"
+  ],
+  "host.name.keyword": [
+    "filebeat-tvlxq"
+  ],
+  "label": [
+    "Warning"
+  ],
+  "label.keyword": [
+    "Warning"
+  ],
+  "log_msg": [
+    "   [GTID INFO] Reading from undo log :ff49d04c-3130-11ee-83a6-00163e0b0612:9245515-9245517"
+  ],
+  "log_msg.keyword": [
+    "   [GTID INFO] Reading from undo log :ff49d04c-3130-11ee-83a6-00163e0b0612:9245515-9245517"
+  ],
+  "subsystem": [
+    "InnoDB"
+  ],
+  "subsystem.keyword": [
+    "InnoDB"
+  ],
+  "tags": [
+    "beats_input_codec_plain_applied"
+  ],
+  "tags.keyword": [
+    "beats_input_codec_plain_applied"
+  ],
+  "thread": [
+    1
+  ],
+  "_id": "fHJqHIoBThSFx_rRZvF0",
+  "_index": "dn_error_log-2023.08.22",
+  "_score": null
 }
 ```

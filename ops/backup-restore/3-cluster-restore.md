@@ -26,7 +26,7 @@ spec:
           image: polardbx/polardbx-sql:latest
       dn:
         template:
-          image: polardbx/polardbx-engine:latest
+          image: polardbx/polardbx-engine-2.0:latest
   restore:                          
     backupset: pxcbackup-test
     syncSpecWithOriginalCluster: false
@@ -55,7 +55,7 @@ spec:
           image: polardbx/polardbx-sql:latest
       dn:
         template:
-          image: polardbx/polardbx-engine:latest
+          image: polardbx/polardbx-engine-2.0:latest
   restore:                  
     from:
       backupSetPath: /polardbx/backup/pxcbackup-test
